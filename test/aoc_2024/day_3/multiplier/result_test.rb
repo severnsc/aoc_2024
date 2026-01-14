@@ -24,4 +24,16 @@ class Multiplier::ResultTest < Minitest::Test
 
     assert_equal 14, multiplier.result
   end
+
+  def test_disabled_flag
+    multiplier = Multiplier.new ["don't()", "mul(3,2)"]
+
+    assert_equal 0, multiplier.result
+  end
+
+  def test_renabling
+    multiplier = Multiplier.new ["don't()", "mul(3,2)", "do()", "mul(2,4)"]
+
+    assert_equal 8, multiplier.result
+  end
 end

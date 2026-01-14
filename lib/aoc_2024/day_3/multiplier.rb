@@ -4,7 +4,19 @@ class Multiplier
   end
 
   def result
-    instructions.sum { |instruction| process_instruction instruction }
+    sum = 0
+    enabled = true
+    instructions.each do |instruction|
+      case instruction
+      when "do()"
+        enabled = true
+      when "don't()"
+        enabled = false
+      else
+        sum += process_instruction(instruction) if enabled
+      end
+    end
+    sum
   end
 
   private
