@@ -18,5 +18,3 @@ module DayThree
     p multiplier.result
   end
 end
-
-DayThree.solve_part_two
