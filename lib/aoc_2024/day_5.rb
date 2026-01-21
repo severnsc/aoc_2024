@@ -24,5 +24,3 @@ module DayFive
     p middles.sum
   end
 end
-
-DayFive.solve_part_two
