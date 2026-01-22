@@ -2,6 +2,7 @@ class BridgeRepair
   attr_accessor :operators
 
   ADD = ->(x) { ->(y) { x + y } }
+  CONCATENATE = ->(x) { ->(y) { "#{x}#{y}".to_i } }
   MULTIPLY = ->(x) { ->(y) { x * y } }
 
   def calibration_result(test_values)
@@ -34,6 +35,8 @@ class BridgeRepair
         method = ADD.call(operand)
       when "*"
         method = MULTIPLY.call(operand)
+      when "||"
+        method = CONCATENATE.call(operand)
       else
         operand = term if operand.nil?
         if method

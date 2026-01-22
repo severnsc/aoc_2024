@@ -41,4 +41,33 @@ class BridgeRepair::CalibrationResultTest < Minitest::Test
 
     assert_equal 3749, @bridge_repair.calibration_result(input)
   end
+
+  def test_concatenation_operator
+    @bridge_repair.operators = ["||"]
+
+    assert_equal 11, @bridge_repair.calibration_result([[11, [1, 1]]])
+  end
+
+  def test_concatenation_with_other_operators
+    @bridge_repair.operators = ["+", "*", "||"]
+
+    assert_equal 192, @bridge_repair.calibration_result([[192, [17, 8, 14]]])
+  end
+
+  def test_aoc_part_two_example
+    input = [
+      [190, [10, 19]],
+      [3267, [81, 40, 27]],
+      [83, [17, 5]],
+      [156, [15, 6]],
+      [7290, [6, 8, 6, 15]],
+      [161_011, [16, 10, 13]],
+      [192, [17, 8, 14]],
+      [21_037, [9, 7, 18, 13]],
+      [292, [11, 6, 16, 20]]
+    ]
+    @bridge_repair.operators = ["+", "*", "||"]
+
+    assert_equal 11_387, @bridge_repair.calibration_result(input)
+  end
 end
