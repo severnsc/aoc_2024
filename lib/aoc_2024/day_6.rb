@@ -8,6 +8,11 @@ module DaySix
     result = guard.patrol room
     p(result.sum { |row| row.count "X" })
   end
-end
 
-DaySix.solve_part_one
+  def self.solve_part_two
+    input = File.read File.expand_path "day_6/input.txt", File.dirname(__FILE__)
+    room = input.lines.map(&:chomp)
+    guard = Aoc2024::Guard.new
+    p guard.loop_positions_for(room).count
+  end
+end
