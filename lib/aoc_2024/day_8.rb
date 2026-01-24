@@ -8,6 +8,10 @@ module DayEight
     city_map = CityMap.new input
     p city_map.antinodes.count
   end
-end
 
-DayEight.solve_part_one
+  def self.solve_part_two
+    input = File.read File.expand_path "day_8/input.txt", File.dirname(__FILE__)
+    city_map = CityMap.new input
+    p city_map.harmonic_antinodes.count
+  end
+end

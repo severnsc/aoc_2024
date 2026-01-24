@@ -11,12 +11,19 @@ class Point
     self.==(other)
   end
 
+  def equation_for(other)
+    b = y - slope_with(other) * x
+    ->(x) { slope_with(other) * x + b }
+  end
+
   def hash
     [x, y].hash
   end
 
   def slope_with(point)
-    (point.y - y.to_f) / (point.x - x.to_f)
+    return nil if (point.x - x).zero?
+
+    Rational(point.y - y, 1) / Rational(point.x - x, 1)
   end
 
   def within_boundaries?(boundaries)

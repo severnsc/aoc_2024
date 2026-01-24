@@ -26,6 +26,20 @@ class CityMap
     end
   end
 
+  def harmonic_antinodes
+    return [] unless antennas.length > 1
+
+    antinodes = Set.new
+    antenna_pairs.each do |first, second|
+      linear_equation = first.equation_for second
+      map_boundaries[:x].each do |x|
+        y = linear_equation.call x
+        antinodes.add(Antinode.new(x:, y: y.to_i)) if y.denominator == 1 && map_boundaries[:y].include?(y)
+      end
+    end
+    antinodes.to_a
+  end
+
   private
 
   def antenna_frequency_regex
